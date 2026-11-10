@@ -377,7 +377,7 @@ export default function AlunoMateriaisPage() {
 
       <div className="container">
         <div className="header">
-          <h1>📂 Materiais e Atividades</h1>
+          <h1> Materiais e Atividades</h1>
           <p>Veja os materiais publicados nas turmas em que você está matriculado</p>
         </div>
 

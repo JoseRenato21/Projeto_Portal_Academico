@@ -23,19 +23,19 @@ export default function ProfessorPage() {
 
       <div className="container">
         <div className="header">
-          <h1>👨‍🏫 Painel do Professor</h1>
+          <h1> Painel do Professor</h1>
           <p>Gerencie suas turmas, inscrições e lançamento de notas</p>
         </div>
 
         <div className="cards-grid">
           <Link to="/professor/turmas" className="card-link">
-            <div className="card-icon">📚</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Minhas Turmas</h3>
             <p className="card-desc">Acesse as turmas que você está lecionando e gerencie conteúdos</p>
           </Link>
 
           <Link to="/professor/inscricoes" className="card-link green">
-            <div className="card-icon">📝</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Gerenciar Inscrições</h3>
             <p className="card-desc">Visualize e gerencie as inscrições dos alunos em suas turmas</p>
           </Link>

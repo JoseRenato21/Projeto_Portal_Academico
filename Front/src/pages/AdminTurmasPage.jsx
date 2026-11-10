@@ -317,7 +317,7 @@ export default function AdminTurmasPage() {
 
       <div className="container">
         <div className="header">
-          <h1>📚 Gerenciar Turmas</h1>
+          <h1> Gerenciar Turmas</h1>
           <p>Crie, edite e gerencie as turmas do sistema</p>
         </div>
 
@@ -325,7 +325,7 @@ export default function AdminTurmasPage() {
 
         {/* FORM */}
         <div className="card form-section">
-          <h2>{editingId === null ? "➕ Adicionar Turma" : "✏️ Editar Turma"}</h2>
+          <h2>{editingId === null ? " Adicionar Turma" : " Editar Turma"}</h2>
 
           <form onSubmit={handleSubmit}>
             <div className="form-row">

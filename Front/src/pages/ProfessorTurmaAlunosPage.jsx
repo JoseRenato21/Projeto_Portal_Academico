@@ -141,7 +141,7 @@ export default function ProfessorTurmaAlunosPage() {
 
       <div className="container">
         <div className="header">
-          <h1>📝 Lançar Notas</h1>
+          <h1> Lançar Notas</h1>
           <p>{nomeTurma}</p>
         </div>
 

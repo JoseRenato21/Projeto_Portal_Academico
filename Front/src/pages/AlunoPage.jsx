@@ -22,13 +22,13 @@ export default function AlunoPage() {
 
       <div className="container">
         <div className="header">
-          <h1>👨‍🎓 Área do Aluno</h1>
+          <h1> Área do Aluno</h1>
           <p>Gerencie suas inscrições, turmas e materiais</p>
         </div>
 
         <div className="cards-grid">
           <Link to="/aluno/turmas" className="card-link">
-            <div className="card-icon">📘</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Turmas Disponíveis</h3>
             <p className="card-desc">
               Conheça as turmas abertas para inscrição e escolha as que deseja fazer
@@ -36,7 +36,7 @@ export default function AlunoPage() {
           </Link>
 
           <Link to="/aluno/inscricoes" className="card-link">
-            <div className="card-icon">📄</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Minhas Inscrições</h3>
             <p className="card-desc">
               Acompanhe suas inscrições, notas e histórico acadêmico
@@ -44,7 +44,7 @@ export default function AlunoPage() {
           </Link>
 
           <Link to="/aluno/materiais" className="card-link">
-            <div className="card-icon">📂</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Materiais e Atividades</h3>
             <p className="card-desc">
               Veja os materiais publicados nas turmas em que você está matriculado e responda atividades

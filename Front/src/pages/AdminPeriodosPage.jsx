@@ -174,7 +174,7 @@ export default function AdminPeriodosPage() {
 
       <div className="container">
         <div className="header">
-          <h1>📅 Gerenciar Períodos</h1>
+          <h1> Gerenciar Períodos</h1>
           <p>Crie, edite e gerencie os períodos acadêmicos</p>
         </div>
 
@@ -182,7 +182,7 @@ export default function AdminPeriodosPage() {
 
         {/* FORM */}
         <div className="card form-section">
-          <h2>{editingId === null ? "➕ Adicionar Período" : "✏️ Editar Período"}</h2>
+          <h2>{editingId === null ? " Adicionar Período" : " Editar Período"}</h2>
 
           <form onSubmit={handleSubmit}>
             <div className="form-row">

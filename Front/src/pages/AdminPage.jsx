@@ -21,37 +21,37 @@ export default function AdminPage() {
 
       <div className="container">
         <div className="header">
-          <h1>🛡️ Painel do Administrador</h1>
+          <h1> Painel do Administrador</h1>
           <p>Gerencie todos os recursos do sistema</p>
         </div>
 
         <div className="cards-grid">
           <Link to="/admin/usuarios" className="card-link">
-            <div className="card-icon">👥</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Gerenciar Usuários</h3>
             <p className="card-desc">Crie, edite e gerencie todos os usuários do sistema</p>
           </Link>
 
           <Link to="/admin/cursos" className="card-link">
-            <div className="card-icon">📚</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Gerenciar Cursos</h3>
             <p className="card-desc">Administre os cursos disponíveis no sistema</p>
           </Link>
 
           <Link to="/admin/turmas" className="card-link">
-            <div className="card-icon">🏫</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Gerenciar Turmas</h3>
             <p className="card-desc">Crie e gerencie as turmas de cada curso</p>
           </Link>
 
           <Link to="/admin/periodos" className="card-link">
-            <div className="card-icon">📅</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Gerenciar Períodos</h3>
             <p className="card-desc">Configure os períodos acadêmicos do sistema</p>
           </Link>
 
           <Link to="/relatorios" className="card-link">
-            <div className="card-icon">📊</div>
+            <div className="card-icon"></div>
             <h3 className="card-title">Relatórios e Históricos</h3>
             <p className="card-desc">Visualize históricos de alunos e estatísticas de turmas</p>
           </Link>

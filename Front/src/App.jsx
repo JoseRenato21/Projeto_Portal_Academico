@@ -1,5 +1,5 @@
 // src/App.jsx
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link, NavLink, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 
 import LoginPage from "./pages/LoginPage";
@@ -36,23 +36,21 @@ function AppLayout() {
 
   return (
     <>
-      <style>{`
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-        .navbar { background: #1f2937; color: white; padding: 1rem 2rem; display: flex; gap: 2rem; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .nav-link { color: white; text-decoration: none; font-weight: 500; padding: 0.5rem 0; }
-        .nav-link:hover { opacity: 0.8; }
-        .btn-logout { background: #dc2626; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.4rem; cursor: pointer; font-weight: 500; margin-left: auto; }
-        .btn-logout:hover { background: #b91c1c; }
-      `}</style>
-
       <div>
         <header className="navbar">
-          <Link to="/app" className="nav-link">Home</Link>
-          {hasAluno(t) && <Link to="/aluno" className="nav-link">Aluno</Link>}
-          {hasProfessor(t) && <Link to="/professor" className="nav-link">Professor</Link>}
-          {hasAdmin(t) && <Link to="/admin" className="nav-link">Admin</Link>}
-          <button onClick={logout} className="btn-logout">Sair</button>
+          <Link to="/app" className="brand">
+            <span className="brand-mark">G</span>
+            Gestor de Cursos
+          </Link>
+          <NavLink to="/app" end className="nav-link">Início</NavLink>
+          {hasAluno(t) && <NavLink to="/aluno" className="nav-link">Aluno</NavLink>}
+          {hasProfessor(t) && <NavLink to="/professor" className="nav-link">Professor</NavLink>}
+          {hasAdmin(t) && <NavLink to="/admin" className="nav-link">Administração</NavLink>}
+          {hasAdmin(t) && <NavLink to="/relatorios" className="nav-link">Relatórios</NavLink>}
+          <div className="nav-user">
+            <span><strong>{user.nome}</strong></span>
+            <button onClick={logout} className="btn-logout">Sair</button>
+          </div>
         </header>
 
         <Routes>

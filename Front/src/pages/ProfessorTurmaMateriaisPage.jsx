@@ -17,7 +17,7 @@ export default function ProfessorTurmaMateriaisPage() {
   const [descricao, setDescricao] = useState("");
   const [link, setLink] = useState("");
 
-  // 🔹 mapa: id_material -> array de respostas
+  //  mapa: id_material -> array de respostas
   const [respostasPorMaterial, setRespostasPorMaterial] = useState({});
   const [loadingRespostas, setLoadingRespostas] = useState(false);
 

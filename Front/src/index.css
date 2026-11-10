@@ -1,6 +1,239 @@
+/* Sistema de design do portal.
+   Os seletores usam #root para prevalecer sobre os blocos <style> de cada página. */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #f8f9fb;
+  --line: #e2e5ea;
+  --text: #1a2330;
+  --muted: #5d6877;
+  --accent: #0f6b5c;
+  --accent-hover: #0b5548;
+  --accent-soft: #e4f2ef;
+  --ink: #131c26;
+  --danger: #b42318;
+  --danger-soft: #fdeceb;
+  --ok: #17692f;
+  --ok-soft: #e6f4ea;
+  --warn: #8a5300;
+  --warn-soft: #fdf1dc;
+  --info: #1f4f99;
+  --info-soft: #e6eefb;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(19, 28, 38, 0.06), 0 4px 14px rgba(19, 28, 38, 0.05);
+}
+
 * { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; }
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
-  background-color: #f3f4f6;
+  font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
 }
+#root h1, #root h2, #root h3 { color: var(--text); letter-spacing: -0.01em; }
+
+/* ---------- navegação ---------- */
+#root .navbar {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--ink); color: #fff;
+  padding: 0 2rem; height: 58px;
+  display: flex; align-items: center; gap: 0.25rem;
+  box-shadow: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+#root .brand {
+  display: flex; align-items: center; gap: 0.6rem;
+  color: #fff; text-decoration: none; font-weight: 600; font-size: 1rem;
+  margin-right: 1.5rem; letter-spacing: -0.01em;
+}
+#root .brand-mark {
+  width: 28px; height: 28px; border-radius: 7px; background: var(--accent);
+  display: grid; place-items: center; font-weight: 700; font-size: 0.85rem;
+}
+#root .nav-link {
+  color: rgba(255, 255, 255, 0.72); text-decoration: none; font-weight: 500;
+  padding: 0 0.9rem; height: 58px; display: flex; align-items: center;
+  border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s;
+}
+#root .nav-link:hover { color: #fff; opacity: 1; }
+#root .nav-link.active { color: #fff; border-bottom-color: #4fd1b8; }
+#root .nav-user { margin-left: auto; display: flex; align-items: center; gap: 0.9rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); }
+#root .nav-user strong { color: #fff; font-weight: 600; }
+#root .btn-logout {
+  background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 0.4rem 0.9rem; border-radius: 8px; cursor: pointer; font: inherit; font-weight: 500; margin-left: 0;
+}
+#root .btn-logout:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* ---------- estrutura ---------- */
+#root .container { max-width: 1120px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+#root .relatorios-container { max-width: 1240px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+#root .header { margin-bottom: 1.75rem; }
+#root .header h1 { margin: 0 0 0.25rem; font-size: 1.6rem; font-weight: 700; }
+#root .header p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+#root .card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 1.5rem; margin-bottom: 1.5rem;
+}
+#root .section-title { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.25rem; color: var(--text); }
+#root .section-subtitle { font-size: 0.9rem; color: var(--muted); margin: 0 0 1rem; }
+#root .toolbar { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+#root .overflow-x { overflow-x: auto; }
+
+/* atalhos (páginas de seção) */
+#root .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.1rem; margin-top: 1.25rem; }
+#root .card-link {
+  display: flex; flex-direction: column; padding: 1.4rem; background: var(--surface);
+  border: 1px solid var(--line); border-left: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); text-decoration: none; color: var(--text);
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; position: relative;
+}
+#root .card-link::after {
+  content: "\2192"; position: absolute; right: 1.2rem; top: 1.2rem; color: var(--accent); font-size: 1.1rem;
+  transition: transform 0.15s;
+}
+#root .card-link:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 6px 18px rgba(19, 28, 38, 0.09); }
+#root .card-link:hover::after { transform: translateX(3px); }
+#root .card-icon { display: none; }
+#root .card-title { font-size: 1.05rem; font-weight: 600; margin: 0 1.5rem 0.4rem 0; }
+#root .card-desc { font-size: 0.9rem; color: var(--muted); margin: 0; }
+
+/* ---------- botões ---------- */
+#root .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.55rem 1rem; border: 1px solid transparent; border-radius: 8px;
+  cursor: pointer; font: inherit; font-size: 0.9rem; font-weight: 500;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+#root .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+#root .btn-primary { background: var(--accent); color: #fff; }
+#root .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+#root .btn-secondary { background: var(--surface); border-color: var(--line); color: var(--text); }
+#root .btn-secondary:hover:not(:disabled) { background: var(--surface-2); border-color: #cdd2da; }
+#root .btn-success { background: var(--ok); color: #fff; }
+#root .btn-success:hover:not(:disabled) { background: #11521f; }
+#root .btn-danger { background: var(--danger-soft); color: var(--danger); border-color: #f3c7c3; }
+#root .btn-danger:hover:not(:disabled) { background: var(--danger); color: #fff; }
+#root .btn-edit { background: var(--info-soft); color: var(--info); border-color: #c9d9f3; }
+#root .btn-edit:hover:not(:disabled) { background: var(--info); color: #fff; }
+#root .btn-link, #root .action-link { background: none; border: none; color: var(--accent); padding: 0.2rem 0; text-decoration: none; font-weight: 500; cursor: pointer; font: inherit; }
+#root .btn-link:hover, #root .action-link:hover { text-decoration: underline; }
+
+/* ---------- formulários ---------- */
+#root .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+#root .form-group label, #root .info-label { font-weight: 600; font-size: 0.85rem; color: var(--text); }
+#root input[type="text"], #root input[type="password"], #root input[type="number"], #root input[type="date"],
+#root input[type="datetime-local"], #root input[type="email"], #root input[type="url"], #root input[type="search"],
+#root select, #root textarea {
+  font: inherit; font-size: 0.93rem; color: var(--text); background: var(--surface);
+  padding: 0.55rem 0.7rem; border: 1px solid #cfd4dc; border-radius: 8px; width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+#root input:focus, #root select:focus, #root textarea:focus {
+  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
+}
+#root input::placeholder, #root textarea::placeholder { color: #98a1ae; }
+#root .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 1rem; }
+#root .form-actions { display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 0.5rem; }
+#root .checkbox-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.4rem; }
+#root .checkbox-list label, #root .checkbox-group label { font-weight: 400; display: flex; gap: 0.5rem; align-items: center; }
+
+/* ---------- mensagens e estados ---------- */
+#root .error, #root .success {
+  padding: 0.7rem 0.9rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem; border: 1px solid transparent;
+}
+#root .error { background: var(--danger-soft); color: var(--danger); border-color: #f3c7c3; }
+#root .success { background: var(--ok-soft); color: var(--ok); border-color: #c3e3cc; }
+#root .empty, #root .sem-dados, #root .p-center, #root .loading-msg { text-align: center; color: var(--muted); padding: 1.75rem 1rem; font-size: 0.95rem; }
+
+/* ---------- tabelas (os estilos de linha vêm inline nas páginas) ---------- */
+#root table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: transparent; }
+#root table th {
+  background: var(--surface-2) !important; color: var(--muted) !important;
+  font-size: 0.74rem !important; font-weight: 600 !important; text-transform: uppercase;
+  letter-spacing: 0.05em; text-align: left; padding: 0.7rem 0.85rem !important;
+  border-bottom: 1px solid var(--line) !important; border-top: 1px solid var(--line) !important;
+}
+#root table td { padding: 0.75rem 0.85rem !important; border-bottom: 1px solid #edeff3 !important; color: var(--text); vertical-align: middle; }
+#root table tbody tr:hover td { background: #fafbfc; }
+
+/* ---------- badges ---------- */
+#root .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.76rem; font-weight: 600; background: #eceff3; color: var(--muted); }
+#root .badge-approved, #root .badge-aprovado, #root .badge-ativo, #root .badge-success { background: var(--ok-soft); color: var(--ok); }
+#root .badge-reproved, #root .badge-reprovado, #root .badge-inativo, #root .badge-danger { background: var(--danger-soft); color: var(--danger); }
+#root .badge-incomplete, #root .badge-pendente, #root .badge-warn { background: var(--warn-soft); color: var(--warn); }
+#root .badge-cursando, #root .badge-info { background: var(--info-soft); color: var(--info); }
+
+/* ---------- modais ---------- */
+#root .modal { background: rgba(19, 28, 38, 0.5); backdrop-filter: blur(2px); }
+#root .modal-content { border-radius: 14px; box-shadow: 0 24px 60px rgba(19, 28, 38, 0.3); border: 1px solid var(--line); }
+#root .modal-header h2, #root .modal h2 { font-size: 1.15rem; font-weight: 600; }
+#root .modal-close { color: var(--muted); }
+#root .modal-section { background: var(--surface-2); border-left: 3px solid var(--accent); border-radius: 8px; }
+#root .modal-actions { border-top: 1px solid var(--line); }
+
+/* ---------- notas ---------- */
+#root .nota-item { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+#root .nota-valor { font-family: "IBM Plex Mono", ui-monospace, monospace; color: var(--accent); font-weight: 500; }
+
+/* ---------- boas-vindas e login ---------- */
+.hero-box {
+  background: var(--ink); color: #fff; border-radius: 14px; padding: 2rem 2.2rem; margin-bottom: 1.5rem;
+  display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.hero-box h2 { margin: 0 0 0.35rem; font-size: 1.55rem; font-weight: 600; color: #fff !important; }
+.hero-box p { margin: 0; color: rgba(255, 255, 255, 0.72); max-width: 520px; }
+.hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+.hero-tag { font-size: 0.78rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 999px; background: rgba(79, 209, 184, 0.16); color: #7fe3cf; }
+
+.login-shell { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; }
+.login-side {
+  background: var(--ink); color: #fff; padding: 3rem 3.5rem; display: flex; flex-direction: column; justify-content: space-between;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.login-side .brand { margin: 0; }
+.login-side h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 1rem; color: #fff !important; font-weight: 600; max-width: 460px; }
+.login-side p { color: rgba(255, 255, 255, 0.7); max-width: 440px; margin: 0; font-size: 1.02rem; }
+.login-side small { color: rgba(255, 255, 255, 0.45); }
+.login-main { display: flex; align-items: center; justify-content: center; padding: 2rem; background: var(--bg); }
+.login-card { width: 100%; max-width: 380px; }
+.login-card h2 { margin: 0 0 0.35rem; font-size: 1.5rem; }
+.login-card .sub { color: var(--muted); margin: 0 0 1.6rem; }
+.login-card .btn { width: 100%; padding: 0.7rem; font-size: 0.98rem; }
+.login-hint { margin-top: 1.4rem; padding: 0.8rem 0.9rem; border: 1px dashed #c9ced6; border-radius: 8px; font-size: 0.82rem; color: var(--muted); }
+.login-hint code { font-family: "IBM Plex Mono", monospace; color: var(--text); }
+
+@media (max-width: 860px) {
+  .login-shell { grid-template-columns: 1fr; }
+  .login-side { display: none; }
+  #root .navbar { padding: 0 1rem; overflow-x: auto; }
+  #root .nav-user span { display: none; }
+}
+
+/* ---------- cartões de turma ---------- */
+#root .turma-section { margin-bottom: 2rem; }
+#root .turma-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; margin-top: 0.75rem; }
+#root .turma-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 1.2rem 1.3rem; display: flex; flex-direction: column; gap: 0.9rem;
+}
+#root .turma-card-head { display: flex; justify-content: space-between; gap: 0.75rem; align-items: flex-start; }
+#root .turma-card h3 { margin: 0; font-size: 1.02rem; font-weight: 600; }
+#root .turma-card-sub { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.86rem; }
+#root .turma-card-info { margin: 0; display: grid; gap: 0.5rem; }
+#root .turma-card-info dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; }
+#root .turma-card-info dd { margin: 0; font-size: 0.92rem; }
+#root .turma-card .btn { align-self: flex-start; }
+
+/* atalhos da página inicial */
+#root .home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+
+/* botões com estilo inline nas páginas antigas */
+#root button[style*="#2563eb"], #root button[style*="rgb(37, 99, 235)"] { background: var(--accent) !important; }
+#root button[style*="#2563eb"]:hover { background: var(--accent-hover) !important; }
+#root button[style*="#dc2626"], #root button[style*="#ef4444"] { background: var(--danger) !important; }
+#root button[style*="#16a34a"], #root button[style*="#10b981"], #root button[style*="#059669"] { background: var(--ok) !important; }
+#root .badge { white-space: nowrap; }

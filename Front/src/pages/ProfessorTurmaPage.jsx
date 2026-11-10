@@ -62,7 +62,7 @@ export default function ProfessorTurmasPage() {
                     state={{ nomeTurma: t.nome }}
                     className="action-link"
                   >
-                    📝 Notas
+                     Notas
                   </Link>
                   <span className="separator">·</span>
                   <Link
@@ -70,7 +70,7 @@ export default function ProfessorTurmasPage() {
                     state={{ nomeTurma: t.nome }}
                     className="action-link"
                   >
-                    📂 Materiais
+                     Materiais
                   </Link>
                 </div>
               </td>
@@ -109,7 +109,7 @@ export default function ProfessorTurmasPage() {
 
       <div className="container">
         <div className="header">
-          <h1>📚 Minhas Turmas</h1>
+          <h1> Minhas Turmas</h1>
           <p>Gerencie suas turmas e lançe notas</p>
         </div>
 

@@ -27,66 +27,62 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: "#111827"
-    }}>
-      <div style={{
-        background: "#fff",
-        padding: "2rem",
-        borderRadius: "0.75rem",
-        width: "100%",
-        maxWidth: "400px"
-      }}>
+    <div className="login-shell">
+      <aside className="login-side">
+        <div className="brand">
+          <span className="brand-mark">G</span>
+          Gestor de Cursos
+        </div>
+        <div>
+          <h1>Turmas, notas e materiais em um só lugar.</h1>
+          <p>
+            Inscrição em turmas, acompanhamento de notas, publicação de materiais e
+            relatórios de histórico para alunos, professores e coordenação.
+          </p>
+        </div>
+        <small>Portal acadêmico · CEFET/RJ</small>
+      </aside>
 
-        <h2 style={{ textAlign: "center", marginBottom: "1.5rem" }}>Login</h2>
+      <main className="login-main">
+        <div className="login-card" id="root-login">
+          <h2>Entrar</h2>
+          <p className="sub">Use seu CPF e a senha cadastrada.</p>
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="cpf">CPF</label>
+              <input
+                id="cpf"
+                type="text"
+                inputMode="numeric"
+                placeholder="Somente números"
+                maxLength={11}
+                value={cpf}
+                onChange={(e) => setCpf(e.target.value)}
+                required
+              />
+            </div>
 
-          <input
-            type="text"
-            placeholder="CPF"
-            maxLength={11}
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-            required
-            style={{ padding: "0.5rem", borderRadius: "0.5rem", border: "1px solid #d1d5db" }}
-          />
+            <div className="form-group">
+              <label htmlFor="senha">Senha</label>
+              <input
+                id="senha"
+                type="password"
+                placeholder="Sua senha"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                required
+              />
+            </div>
 
-          <input
-            type="password"
-            placeholder="Senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-            style={{ padding: "0.5rem", borderRadius: "0.5rem", border: "1px solid #d1d5db" }}
-          />
+            {status && <div className="error">{status}</div>}
 
-          <button
-            type="submit"
-            disabled={loading}
-            style={{
-              padding: "0.75rem",
-              borderRadius: "0.5rem",
-              border: "none",
-              background: loading ? "#9ca3af" : "#2563eb",
-              color: "#fff",
-              cursor: loading ? "not-allowed" : "pointer"
-            }}
-          >
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
-
-        </form>
-
-        {status && (
-          <p style={{ marginTop: "1rem", color: "red" }}>{status}</p>
-        )}
-
-      </div>
+            <button type="submit" disabled={loading} className="btn btn-primary">
+              {loading ? "Entrando..." : "Entrar"}
+            </button>
+          </form>
+        </div>
+      </main>
     </div>
   );
 }

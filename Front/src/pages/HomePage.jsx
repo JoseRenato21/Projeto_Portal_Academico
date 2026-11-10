@@ -1,5 +1,6 @@
 // src/pages/HomePage.jsx
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const API_URL = "http://localhost:3001";
@@ -83,20 +84,62 @@ export default function HomePage() {
       `}</style>
 
       <div className="container">
-        <div className="header">
-          <h1>🎓 Bem-vindo ao Gestor de Cursos</h1>
-          <p>Escolha uma área no menu acima para continuar</p>
-        </div>
-
-        <div className="welcome-box">
-          <h2>Olá, {user?.nome}!</h2>
-          <p>Sua jornada acadêmica começa aqui. Acesse suas turmas, inscrições e muito mais.</p>
-        </div>
-
-        <div className="card">
-          <button onClick={abrirModal} className="btn btn-primary">
-            ⚙️ Editar Perfil
+        <div className="hero-box">
+          <div>
+            <h2>Olá, {user?.nome}</h2>
+            <p>Acesse suas turmas, inscrições, notas e materiais pelo menu superior.</p>
+            <div className="hero-tags">
+              {(user?.tipo & 1) !== 0 && <span className="hero-tag">Aluno</span>}
+              {(user?.tipo & 2) !== 0 && <span className="hero-tag">Professor</span>}
+              {(user?.tipo & 4) !== 0 && <span className="hero-tag">Administrador</span>}
+            </div>
+          </div>
+          <button onClick={abrirModal} className="btn btn-secondary">
+            Editar perfil
           </button>
+        </div>
+
+        <div className="home-grid">
+          {(user?.tipo & 1) !== 0 && (
+            <>
+              <Link to="/aluno/turmas" className="card-link">
+                <h3 className="card-title">Turmas disponíveis</h3>
+                <p className="card-desc">Veja as turmas abertas e faça sua inscrição.</p>
+              </Link>
+              <Link to="/aluno/inscricoes" className="card-link">
+                <h3 className="card-title">Minhas inscrições</h3>
+                <p className="card-desc">Acompanhe notas, médias e situação em cada turma.</p>
+              </Link>
+              <Link to="/aluno/materiais" className="card-link">
+                <h3 className="card-title">Materiais e atividades</h3>
+                <p className="card-desc">Apostilas, slides e entregas das suas turmas.</p>
+              </Link>
+            </>
+          )}
+          {(user?.tipo & 2) !== 0 && (
+            <>
+              <Link to="/professor/turmas" className="card-link">
+                <h3 className="card-title">Minhas turmas</h3>
+                <p className="card-desc">Alunos, notas e materiais de cada turma.</p>
+              </Link>
+              <Link to="/professor/inscricoes" className="card-link">
+                <h3 className="card-title">Inscrições</h3>
+                <p className="card-desc">Aprove ou rejeite pedidos de inscrição.</p>
+              </Link>
+            </>
+          )}
+          {(user?.tipo & 4) !== 0 && (
+            <>
+              <Link to="/admin/usuarios" className="card-link">
+                <h3 className="card-title">Usuários</h3>
+                <p className="card-desc">Cadastro, perfis e graduações.</p>
+              </Link>
+              <Link to="/relatorios" className="card-link">
+                <h3 className="card-title">Relatórios</h3>
+                <p className="card-desc">Histórico acadêmico e desempenho por turma.</p>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 

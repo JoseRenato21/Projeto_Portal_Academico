@@ -109,136 +109,95 @@ const TurmasDisponiveis = () => {
   const turmasOptativas = turmas.filter((t) => t.categoria === "optativa");
 
   const renderTurmaItem = (t) => (
-    <li
-      key={t.id_turma}
-      style={{
-        border: "1px solid #ccc",
-        borderRadius: 8,
-        padding: 12,
-        marginBottom: 10,
-        background: "white",
-      }}
-    >
-      <strong>{t.nome_curso}</strong>{" "}
-      — {(t.nome || t.nome_turma) ?? "(sem nome de turma)"} (
-      {t.codigo_turma})
-      <br />
-      Período: {t.nome_periodo}
-      {t.codigo_periodo ? ` (${t.codigo_periodo})` : ""}
-      <br />
-      {t.nome_professor && (
-        <>
-          Professor: {t.nome_professor}
-          {t.matricula_professor ? ` (${t.matricula_professor})` : ""}
-          <br />
-        </>
-      )}
-      Vagas: {t.vagas_regulares} regulares
-      <br />
-      <button
-        style={{ marginTop: 8 }}
-        onClick={() => abrirModal(t)}
-      >
+    <article key={t.id_turma} className="turma-card">
+      <div className="turma-card-head">
+        <div>
+          <h3>{t.nome_curso}</h3>
+          <p className="turma-card-sub">
+            {(t.nome || t.nome_turma) ?? "(sem nome de turma)"} · {t.codigo_turma}
+          </p>
+        </div>
+        <span className="badge badge-info">{t.vagas_regulares} vagas</span>
+      </div>
+      <dl className="turma-card-info">
+        <div>
+          <dt>Período</dt>
+          <dd>
+            {t.nome_periodo}
+            {t.codigo_periodo ? ` (${t.codigo_periodo})` : ""}
+          </dd>
+        </div>
+        {t.nome_professor && (
+          <div>
+            <dt>Professor</dt>
+            <dd>
+              {t.nome_professor}
+              {t.matricula_professor ? ` (${t.matricula_professor})` : ""}
+            </dd>
+          </div>
+        )}
+      </dl>
+      <button className="btn btn-primary" onClick={() => abrirModal(t)}>
         Inscrever-se
       </button>
-    </li>
+    </article>
   );
 
   return (
-    <div
-      style={{
-        padding: "2rem",
-        maxWidth: "900px",
-        margin: "0 auto",
-      }}
-    >
-      <h1 style={{ marginBottom: "1.5rem", fontSize: "2rem" }}>
-        Turmas disponíveis para inscrição
-      </h1>
+    <div className="container">
+      <div className="header">
+        <h1>Turmas disponíveis para inscrição</h1>
+        <p>Escolha as turmas em que deseja se matricular neste período.</p>
+      </div>
 
-      {loading && <p>Carregando turmas disponíveis...</p>}
+      {loading && <p className="p-center">Carregando turmas disponíveis...</p>}
 
-      {erro && <p style={{ color: "red" }}>{erro}</p>}
+      {erro && <div className="error">{erro}</div>}
 
       {!loading && !erro && turmas.length === 0 && (
-        <p>Nenhuma turma disponível para inscrição no momento.</p>
+        <div className="card">
+          <p className="empty">Nenhuma turma disponível para inscrição no momento.</p>
+        </div>
       )}
 
       {!loading && !erro && turmas.length > 0 && (
         <>
           {turmasCurso.length > 0 && (
-            <section style={{ marginBottom: "2rem" }}>
-              <h2 style={{ fontSize: "1.4rem", marginBottom: "0.75rem" }}>
-                Disciplinas do meu curso
-              </h2>
-              <ul style={{ listStyle: "none", padding: 0 }}>
-                {turmasCurso.map(renderTurmaItem)}
-              </ul>
+            <section className="turma-section">
+              <h2 className="section-title">Disciplinas do meu curso</h2>
+              <div className="turma-grid">{turmasCurso.map(renderTurmaItem)}</div>
             </section>
           )}
 
           {turmasOptativas.length > 0 && (
-            <section>
-              <h2 style={{ fontSize: "1.4rem", marginBottom: "0.75rem" }}>
-                Disciplinas optativas
-              </h2>
-              <ul style={{ listStyle: "none", padding: 0 }}>
-                {turmasOptativas.map(renderTurmaItem)}
-              </ul>
+            <section className="turma-section">
+              <h2 className="section-title">Disciplinas optativas</h2>
+              <div className="turma-grid">{turmasOptativas.map(renderTurmaItem)}</div>
             </section>
           )}
         </>
       )}
 
-      {/* Modal de confirmação */}
       {turmaSelecionada && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            backgroundColor: "rgba(0,0,0,0.4)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 999,
-          }}
-        >
-          <div
-            style={{
-              background: "#fff",
-              padding: 20,
-              borderRadius: 8,
-              maxWidth: 400,
-              width: "100%",
-            }}
-          >
-            <h3>Confirmar inscrição</h3>
+        <div className="modal" onClick={fecharModal}>
+          <div className="modal-content" style={{ maxWidth: 440 }} onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Confirmar inscrição</h2>
+            </div>
             <p>
               Confirmar inscrição na turma{" "}
-              <strong>
-                {(turmaSelecionada.nome ||
-                  turmaSelecionada.nome_turma) ?? ""}
-              </strong>{" "}
-              do curso{" "}
-              <strong>{turmaSelecionada.nome_curso}</strong>?
+              <strong>{(turmaSelecionada.nome || turmaSelecionada.nome_turma) ?? ""}</strong>{" "}
+              do curso <strong>{turmaSelecionada.nome_curso}</strong>?
             </p>
 
-            {mensagemModal && (
-              <p style={{ marginTop: 10 }}>{mensagemModal}</p>
-            )}
+            {mensagemModal && <div className="success">{mensagemModal}</div>}
 
-            <div style={{ marginTop: 16 }}>
-              <button
-                onClick={handleInscricao}
-                disabled={inscrevendo}
-              >
-                {inscrevendo ? "Enviando..." : "Confirmar"}
-              </button>
-              <button
-                onClick={fecharModal}
-                style={{ marginLeft: 8 }}
-              >
+            <div className="modal-actions">
+              <button className="btn btn-secondary" onClick={fecharModal}>
                 Fechar
+              </button>
+              <button className="btn btn-primary" onClick={handleInscricao} disabled={inscrevendo}>
+                {inscrevendo ? "Enviando..." : "Confirmar"}
               </button>
             </div>
           </div>

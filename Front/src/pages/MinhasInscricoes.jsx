@@ -294,7 +294,7 @@ const MinhasInscricoes = () => {
 
       <div className="container">
         <div className="header">
-          <h1>📚 Minhas Inscrições</h1>
+          <h1> Minhas Inscrições</h1>
           <p>Acompanhe seu desempenho nas turmas</p>
         </div>
 
@@ -310,7 +310,7 @@ const MinhasInscricoes = () => {
 
         {!loading && !erro && cursando.length > 0 && (
           <div className="card">
-            <h2 className="section-title">🎓 Cursando</h2>
+            <h2 className="section-title"> Cursando</h2>
             <p className="section-subtitle">Turmas em andamento</p>
             <Tabela dados={cursando} mostraNota={false} />
           </div>
@@ -318,7 +318,7 @@ const MinhasInscricoes = () => {
 
         {!loading && !erro && historico.length > 0 && (
           <div className="card">
-            <h2 className="section-title">📖 Histórico</h2>
+            <h2 className="section-title"> Histórico</h2>
             <p className="section-subtitle">
               Turmas concluídas ou com resultado
             </p>
@@ -341,7 +341,7 @@ const MinhasInscricoes = () => {
             </div>
 
             <div className="modal-section">
-              <h3>📋 Informações da Turma</h3>
+              <h3> Informações da Turma</h3>
               <p>
                 <span className="info-label">Curso:</span>{" "}
                 {selecionada.nome_curso}
@@ -367,7 +367,7 @@ const MinhasInscricoes = () => {
             </div>
 
             <div className="modal-section">
-              <h3>🎓 Graduação</h3>
+              <h3> Graduação</h3>
               <p>
                 <span className="info-label">Programa:</span>{" "}
                 {selecionada.nome_graduacao || "-"}
@@ -375,7 +375,7 @@ const MinhasInscricoes = () => {
             </div>
 
             <div className="modal-section">
-              <h3>🔄 Status</h3>
+              <h3> Status</h3>
               <p>
                 <span className="info-label">Inscrição:</span>{" "}
                 {getStatusInscricaoTexto(selecionada)}
@@ -403,7 +403,7 @@ const MinhasInscricoes = () => {
             </div>
 
             <div className="modal-section">
-              <h3>📊 Notas do Aluno</h3>
+              <h3> Notas do Aluno</h3>
               <div className="nota-container">
                 <div className="nota-item">
                   <div className="info-label">P1</div>

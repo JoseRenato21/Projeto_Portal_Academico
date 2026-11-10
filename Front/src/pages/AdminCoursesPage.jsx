@@ -332,13 +332,13 @@ export default function AdminCoursesPage() {
                       </td>
                       <td style={{...styles.td, ...styles.tdActions}}>
                         <button onClick={() => startEdit(c)} style={styles.btnAction.edit}>
-                          ✏️ Editar
+                           Editar
                         </button>
                         <button 
                           onClick={() => handleDelete(c.id_curso, c.nome)} 
                           style={styles.btnAction.delete}
                         >
-                          🗑️ Excluir
+                           Excluir
                         </button>
                       </td>
                     </tr>
@@ -353,7 +353,7 @@ export default function AdminCoursesPage() {
   );
 }
 
-// ✨ ESTILOS
+//  ESTILOS
 const styles = {
   container: {
     maxWidth: "1200px",

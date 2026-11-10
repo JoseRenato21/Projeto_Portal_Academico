@@ -358,7 +358,7 @@ export default function RelatoriosHistoricoPage() {
       `}</style>
 
       <div className="header">
-        <h1>📊 Relatórios e Histórico Acadêmico</h1>
+        <h1> Relatórios e Histórico Acadêmico</h1>
         <p>Consulte informações detalhadas sobre alunos, turmas e desempenho acadêmico</p>
       </div>
 
@@ -801,7 +801,7 @@ export default function RelatoriosHistoricoPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    🏆 Professor Destaque
+                     Professor Destaque
                   </h3>
                   <div
                     style={{
