@@ -17,12 +17,13 @@ Executa antes de cada `INSERT` em `inscricao_turma` e recusa a inscrição quand
 Quando passa nas validações, o trigger também:
 
 - preenche a data da inscrição;
-- calcula `tentativas_anteriores`, contando reprovações anteriores no curso;
-- define a posição na fila e o status inicial conforme as vagas regulares e extras.
+- calcula `tentativas_anteriores`: o maior número de tentativas do aluno naquele curso em matrículas que ficaram incompletas;
+- calcula a posição na fila, que prioriza quem tem mais tentativas anteriores e, em caso de empate, quem se inscreveu primeiro;
+- define o status inicial pela posição: `aprovado` dentro das vagas regulares, `pendente` dentro das vagas extras e `rejeitado` depois disso.
 
 ## Processamento das inscrições (`trg_processa_inscricoes_turma`)
 
-Ao fechar as inscrições de uma turma, decide quais inscrições pendentes são aprovadas e quais são rejeitadas, de acordo com as vagas disponíveis e a ordem da fila. Alunos aprovados passam a ter um registro em `aluno_curso`.
+Dispara quando `status_inscricoes` da turma passa de `aberta` para `fechada`. Reordena todas as inscrições da turma pelo mesmo critério da fila (mais tentativas anteriores primeiro, depois data de inscrição), reaplica o status por posição (`aprovado`, `pendente` ou `rejeitado`) e cria em `aluno_curso` a matrícula, com status `cursando`, de cada aluno aprovado.
 
 ## Média final (`trg_ac_calcula_media`)
 
@@ -45,7 +46,7 @@ Dispara quando uma turma passa de ativa para inativa. Para cada aluno da turma:
 
 ## Períodos (`trg_periodo_desativa`)
 
-Ao desativar um período, as turmas dele são encerradas, o que aciona `trg_turma_encerrar` para cada uma.
+Ao desativar um período, todas as turmas dele são desativadas, o que aciona `trg_turma_encerrar` para cada uma, e os cursos dessas turmas também são marcados como inativos.
 
 ## Respostas de atividades (`chk_resposta_atividade`)
 
