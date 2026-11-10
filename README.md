@@ -71,10 +71,10 @@ Pré-requisitos: Node.js 18 ou superior e MySQL 8 ou superior.
 
 ```bash
 mysql -u root -p < database/schema.sql   # tabelas e triggers
-mysql -u root -p < database/seed.sql     # dados de demonstração (opcional)
+mysql -u root -p < database/seed.sql     # usuários, cursos e turmas iniciais (opcional)
 ```
 
-O `seed.sql` cria sete usuários fictícios, cuja senha é `123456`:
+O `seed.sql` cria sete usuários, todos com a senha `123456`:
 
 | CPF | Perfil | Nome |
 |-----|--------|------|
@@ -130,7 +130,7 @@ Abra `http://localhost:5173` e entre com um dos CPFs acima.
 │       └── index.css           # sistema de design
 ├── database/
 │   ├── schema.sql              # tabelas, chaves e triggers
-│   └── seed.sql                # dados de demonstração
+│   └── seed.sql                # dados iniciais
 ├── docs/
 │   ├── API.md                  # referência dos endpoints
 │   ├── REGRAS_DE_NEGOCIO.md    # regras implementadas no banco

@@ -1,4 +1,4 @@
--- Dados de demonstração (nomes e CPFs fictícios). Senha de todos: 123456
+-- Dados iniciais. Senha de todos os usuários: 123456
 USE gestorDeCursos;
 
 INSERT INTO graduacao (codigo_graduacao, nome) VALUES
